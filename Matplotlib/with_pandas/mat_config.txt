@@ -1,0 +1,33 @@
+matplotlib configuration
+	Matplotlib has an expensive set of global parameters governing 
+	figure size,plot spacing,colors,font size,grids...
+	
+	One way to modify the configuration programmatically from python
+	is to use the rc method:
+		for example to set the global default figure size to be 
+		10 x 10 
+			plt.rc('figure',figsize=(10,10))
+		
+		first argument of rc method is component you want to customize
+		such as 
+			figure
+			axes
+			xtick
+			ytick
+			grid
+			legend 
+			many more
+			
+		After that can follow a seq of keyword arguments indicating
+		the new parameters.
+		can also pass parameters using dict
+		
+		font_options = {'family':'monospace',
+						'weight':'bold',
+						'size':'samll'}
+		plt.rc('font',**font_options)
+		
+========================================================================
+seaborn package has several built in plot themes or styles
+that use matplotlib's configuration system internally.
+		

@@ -1,0 +1,16 @@
+a = (True,True,True)
+b = (True,True,True)
+print(a,type(a))
+print(b,type(b))
+print(a==b)
+
+a = True,True,True
+b = (True,True,True)
+print(a,type(a))
+print(b,type(b))
+print(a==b)
+print("-----------------------------------------")
+print((True,True,True) == (True,True,True))
+print("-----------------------------------------")
+print(True,True,True == (True,True,True))
+print("-----------------------------------------")

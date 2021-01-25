@@ -1,0 +1,41 @@
+Scipy stats
+	this modules contains a large number of statistical distributions,
+	statistical functions and tests.
+	
+	There is also a very powerful python package for statistical modelling called
+	statsmodels.
+	
+		distributions
+			gaussian
+			normal
+			uniform
+			bionomial
+			poisson
+			
+	sci_stat1.py
+	sci_stat2.py
+	
+statistical tests
+	Tests if two sets of (independent) random data comes from the same distributions.
+	
+	ttest_ind : calculates the T-test for the means of two independent samples of scores.
+	This is two sided test for the null hypothesis that two independent samples have 
+	identical average(expected) values.
+	
+	sci_stat3.py
+	
+	Since the p value is very large we can not reject the hypothesis  that 
+	the two sets of random data have different means.
+	
+	To test if the mean of a single sample of data has mean 0.1 (the true mean is 0.0):
+	
+	sci_stat4.py
+	
+	Low p value means that we can reject hypothesis that the mean of Yis 0.1.
+	
+	sci_stat5.py
+	ttest_1samp calculates the t-test for mean of one group of scores.
+	This is a two-sided test for the null hypothesis that the expected value(mean)
+	of a sample of independent observations 'a' is equal to the given 
+	population mean.
+	

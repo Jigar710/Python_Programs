@@ -1,0 +1,58 @@
+open() : open file and return file object
+	open(file_name[,mode])
+	close()
+	read([num_of_char])
+	readline()
+	jjigar
+	shekhat
+	muskan
+	readlines()
+	write()
+	writelines()
+	seek()
+	tell()
+pickle : use for serialization
+	load()	: read object from file
+	dump()	: write object into file
+	loads()	: read object from variable
+	dumps()	: write binary of object into variable
+json
+	load()	: read object from file
+	dump()	: write object into file (hint : use __dict__ )
+	loads()
+	dumps()
+jsonpickle
+	load()
+	dump()
+=============================================================================================
+modes 
+r	Opens a file for reading. (default)
+w	Opens a file for writing. 
+	Creates a new file if it does not exist or truncates the file if it exists.
+x	Opens a file for exclusive creation. 
+	If the file already exists, the operation fails.
+	opens file for writing mode if file does not exists
+a	Opens a file for appending at the end of the file without truncating it. 
+	Creates a new file if it does not exist.
+t	Opens in text mode. (default)
+b	Opens in binary mode.
++	Opens a file for updating (reading and writing)
+rb : read + binary
+wb : write + binary
+rw+ : read and write both
+=============================================================================================
+NOTE:
+f = open('data.txt','rb')
+
+#f.seek(4,0)
+f.seek(4)
+
+print(f.read(1).decode('utf-8'))
+
+f.seek(16,1)
+print(f.read(1).decode('utf-8'))
+
+f.seek(-1,2)
+print(f.read().decode('utf-8'))
+
+=============================================================================================

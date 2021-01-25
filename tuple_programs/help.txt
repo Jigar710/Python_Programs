@@ -1,0 +1,17 @@
+tuple
+	use to represent group of elements as a single entity
+	heterogenous : mixer data type
+	create empty tuple : (),tuple()
+	create with single element : (10,)
+	repeated element allows
+	methods :
+		count()
+		index()
+	immutable : can not add, remove , update elements
+	
+positive indexing
+negative indexing
+slicing
+tuple of tuple
+tuple of list
+list of tuple

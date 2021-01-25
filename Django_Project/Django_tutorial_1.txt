@@ -1,0 +1,206 @@
+Why Django?
+	With Django, you can take Web applications from concept 
+	to launch in a matter of hours. 
+	Django takes care of much of the hassle of Web development, 
+	so you can focus on writing your app without needing to 
+	reinvent the wheel. It’s free and open source.
+	
+	Ridiculously fast.
+		Django was designed to help developers take applications 
+		from concept to completion as quickly as possible.
+	Fully loaded.
+		Django includes dozens of extras you can use to handle 
+		common Web development tasks. 
+		Django takes care of user 
+			authentication, 
+			content administration, 
+			site maps, 
+			RSS feeds, 
+			and many more tasks — right out of the box.
+	Reassuringly secure.
+		Django takes security seriously and helps developers 
+		avoid many common security mistakes, 
+		such as 
+			SQL injection, 
+			cross-site scripting, 
+			cross-site request forgery 
+			and clickjacking. 
+		Its user authentication system provides a secure way 
+		to manage user accounts and passwords.
+	Exceedingly scalable.
+		Some of the busiest sites on the planet use Django’s 
+		ability to quickly and flexibly scale to meet the 
+		heaviest traffic demands.
+	Incredibly versatile.
+		Companies, organizations and governments have used 
+		Django to build all sorts of things — 
+		from content management systems to social networks 
+		to scientific computing platforms.
+====================================================================
+Getting started with Django
+	required
+		python
+			Python includes a lightweight database called SQLite so 
+			you won’t need to set up a database just yet.
+	install Django
+		pip install Django
+	verify Django installtion
+		import Django
+		print(Django.get_version())
+====================================================================
+Creating a project
+	From the command line, cd into a directory where you’d like 
+	to store your code, then run the following command:
+		django-admin startproject mysite
+	This will create a mysite directory in your current directory
+	Let’s look at what startproject created:
+	mysite/
+		manage.py
+		mysite/
+			__init__.py
+			settings.py
+			urls.py
+			asgi.py
+			wsgi.py
+		
+	These files are:
+
+		The outer mysite/ root directory is a container for your 
+		project. 
+		Its name doesn’t matter to Django; you can rename it to 
+		anything you like.
+		
+		manage.py: 
+			A command-line utility that lets you interact with 
+			this Django project in various ways. 
+			You can read all the details about manage.py in 
+			django-admin and manage.py.
+
+		The inner mysite/ directory is the actual Python package 
+		for your project. 
+		Its name is the Python package name you’ll need to use to 
+		import anything inside it (e.g. mysite.urls).
+
+		mysite/__init__.py: 
+			An empty file that tells Python that this directory 
+			should be considered a Python package. 
+			If you’re a Python beginner, read more about 
+			packages in the official Python docs.
+
+		mysite/settings.py: 
+			Settings/configuration for this Django project. 
+			Django settings will tell you all about how settings 
+			work.
+
+		mysite/urls.py: 
+			The URL declarations for this Django project; a 
+			“table of contents” of your Django-powered site. 
+			You can read more about URLs in URL dispatcher.
+			
+		mysite/asgi.py: 
+			An entry-point for ASGI-compatible web servers to 
+			serve your project. 
+			
+		mysite/wsgi.py: 
+			An entry-point for WSGI-compatible web servers to 
+			serve your project. 
+====================================================================
+The development server
+	Let’s verify your Django project works. 
+	Change into the outer mysite directory, if you haven’t already, 
+	and run the following commands.
+		python manage.py runserver
+		
+	Now that the server’s running, visit http://127.0.0.1:8000/ with 
+	your Web browser. 
+	You’ll see a “Congratulations!” page, with a rocket taking off. 
+	It worked!
+	
+	changing a port
+		python manage.py runserver 8080	
+====================================================================
+creating an app
+	python manage.py startapp your_app_name
+	
+	That’ll create a directory your_app_name, 
+	which is laid out like this:
+
+	your_app_name/
+		__init__.py
+		admin.py
+		apps.py
+		migrations/
+			__init__.py
+		models.py
+		tests.py
+		views.py
+========================================================================
+Write your first view
+	Let’s write the first view. 
+	Open the file your_app_name/views.py and 
+	put the following Python code in it:
+
+	your_app_name/views.py
+		from django.http import HttpResponse
+
+		def index(request):
+			return HttpResponse("Hello, world")
+		
+	This is the simplest view possible in Django. 
+	To call the view, we need to map it to a URL - and for this 
+	we need a URLconf.
+
+	To create a URLconf in the your_app_name directory, 
+	create a file called urls.py. 
+	Your app directory should now look like:
+	
+	your_app_name
+		__init__.py
+		admin.py
+		apps.py
+		migrations/
+			__init__.py
+		models.py
+		tests.py
+		urls.py
+		views.py
+		
+		
+	In the your_app_name/urls.py file include the following code:
+
+	your_app_name/urls.py
+		from django.urls import path
+
+		from . import views
+
+		urlpatterns = [
+			path('', views.index, name='index'),
+		]
+		
+		
+	The next step is to point the root URLconf at the 
+	your_app_name.urls module. 
+	In mysite/urls.py, add an import for django.urls.include 
+	and insert an include() in the urlpatterns list, 
+	so you have:
+
+		mysite/urls.py
+		from django.contrib import admin
+		from django.urls import include, path
+
+		urlpatterns = [
+			path('your_app_name/', include('your_app_name.urls')),
+			path('admin/', admin.site.urls),
+		]
+	
+	The include() function allows referencing other URLconfs. 
+	Whenever Django encounters include(), it chops off whatever part of the URL 
+	matched up to that point and sends the remaining string to the included 
+	URLconf for further processing.
+
+	The idea behind include() is to make it easy to plug-and-play URLs. 
+	Since your_app_name are in their own URLconf (your_app_name/urls.py), 
+	they can be placed under “/your_app_name/”, or under “/fun_polls/”, or 
+	under “/content/your_app_name/”, or any other path root, 
+	and the app will still work.
+===========================================================================================	

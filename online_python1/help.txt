@@ -1,0 +1,32 @@
+python for data science
+	
+	
+	numpy 
+	scipy 
+	pandas
+	matploit
+	seaborn
+	
+	django	: framework
+		website
+		
+	duration : 4-5 months
+==============================================================================================	
+python	
+	programming language
+		a lang which use the programs for the communication with computer
+
+POP		: procedure oriented PL
+OOPs 	: Object oriented PL
+
+above all are the patterns to write a program
+==============================================================================================	
+www.python.org
+	when will install python
+	checked : add python in a env path
+for documentation
+	https://docs.python.org/3/tutorial/index.html
+==============================================================================================	
+python is a dynamic typed programming lang
+	
+==============================================================================================	

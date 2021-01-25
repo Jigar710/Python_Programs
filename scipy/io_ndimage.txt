@@ -1,0 +1,55 @@
+ScipyIO
+	scipy.io(input and output) package provides a wide a range of functions to 
+	work around with diff format of files some of these are
+		Matlab
+		IDL
+		Matrix MArket
+		Wave
+		Arff
+		Netcdf etc.
+		
+	no		function and description
+	1		Loadmat : loads a Matlab file
+	2		Savemat : saves a Matlab file
+	3		Whosmat : Lists variables inside a Matlab file
+	
+==========================================================================================================================================================
+if we want to inspect the contents of a MATLAB file without reading the data into 
+memory, use the whosmat command.
+
+file_content = sio.whosmat('array.mat')
+print(file_content)
+	
+==========================================================================================================================================================
+scipy.ndimage
+	The scipy ndimage submodule is dedicated to image processing.
+	Here, ndimage means n-dimensional image.
+	Some of most common tasks in image processing as follows:
+		input/output displaying images.
+		Basic manipulation - cropping,flipping, rotating
+		Image filtering - De-noising,shapening,...
+		Image segmentation - labeling pixels corresponding to diff objects.
+		Classification
+		Feature extraction
+		Registration
+	The misc package of scipy comes with some images.
+------------------------------------------------------------------------------------------	
+Image manipulations:
+	
+Any image in its raw format is the combination of colors representated by the numbers in the matrix format. 
+A machine understand and manipulates the image based on those numbers only.
+RGB is a popular way of representation.
+
+stat information of image : sci_ndimage2.py
+-------------------------------------------------------------------------------------------
+Filtering:
+	it is a technique for modifying or enhancing an image.
+	Ex:
+	we can filter image  to emphasize  certain features or remove some features.
+	Image processing operations implemented with filtering include 	
+		smoothing
+		sharpning
+		edge enhancment
+	filtering is a neighnorhood opearation,in which the value of any given pixel in the output 
+	image is determined by applying some algo to the values of the pixels in the neighnorhood 
+	of the corresponding input pixel.

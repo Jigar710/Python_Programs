@@ -1,0 +1,214 @@
+							***** Scipy *****
+lib for scientific algorithms for python
+based on numpy
+SciPy is a collection of 
+	mathematical algorithms and 
+	convenience functions 
+built on the NumPy extension of Python. 
+It adds significant power to the interactive Python session by providing 
+the user with high-level commands and classes for manipulating and 
+visualizing data. 
+==================================================================================
+SciPy is organized into subpackages covering different scientific computing 
+domains. These are summarized in the following table:
+
+Subpackage		Description
+
+cluster			Clustering algorithms
+constants		Physical and mathematical constants
+fftpack			Fast Fourier Transform routines
+integrate		Integration and ordinary differential equation solvers scipy.integrate
+interpolate		Interpolation and smoothing splines
+io				Input and Output
+linalg			Linear algebra
+ndimage			N-dimensional image processing
+odr				Orthogonal distance regression
+optimize		Optimization and root-finding routines		
+signal			Signal processing
+sparse			Sparse matrices and associated routines
+spatial			Spatial data structures and algorithms
+special			Special functions							scipy.special
+stats			Statistical distributions and functions
+
+how to import subpackages
+	from scipy import linalg, optimize
+	import scipy.linalg 
+	import scipy.linalg as lng
+=========================================================================================
+Generally used algorithms in Data Science
+	linalg and stats
+=========================================================================================
+							Linear Algebra
+	from scipy import *
+	import scipy.linalg as la
+	
+	linear algebra
+	this modules contains a lot of matrix related functions, including linear
+	equation solving, eigenvalue solvers, matrix functions 
+	(Ex : matrix-exponentiation), a number of different decomposotions (SVD,LU,
+	Cholesky), etc.
+	
+	Linear algebra systems on the matrix form
+		Ax = b
+	where A : matrix
+		 x,b : vectors can be solved Ex: sci_lin_1.py
+	
+	apply same for matrices
+		Ax = B
+		where A,B and X are matrices Ex: sci_lin_2.py
+------------------------------------------------------------------------------
+Linear Algebra Eigen Analysis
+	The eigenvalue problem for matrix A is
+		AVn= (lamda)nVn
+	where Vn : nth eigenvector and
+	(lamda)n : is nth eigenvalue.
+	
+	To calculate eigenvalues of a matrix, use the eigvals and for calculating
+	both elgenvalues and eigenvectors, use ex : sci_lin_3.py
+	
+	the eigenvectors corresponding to the nth eigenvalue (stored in evals[n]) is
+	the nth column in evecs, ex evecs[:n]. 
+	to verify this lets try multiplying eigenvector with the matrix and compare to
+	the product of the eigenvector and the eigenvalue.
+----------------------------------------------------------------------------
+SVD decomposotions	
+	singular value decomposotions (SVD) can be thought of as an extension of 
+	the eigenvalues probs to matrices that are not square.
+	
+	scipy.linalg.svd factorizes the matrix 'a' into two unitary matrices 
+	'U' and 'Vh' and 1-D array 's' of singular values(real,non-negative) such
+	that a==U*S*Vh 
+	where
+		S : suitably shaped of matrix of zeros with main diagonal 's'.
+=========================================================================================
+Sparse Matrices
+	they are oftern useful in numerical simulations dealing with large
+	system,if the problems can be described in matrix form where the
+	matrices or vectors mostly contains zero.
+
+	scipy has a good support of sparse matrices, with basic linear algebra 
+	operations (such as equation solving, eignvalue calculations, etc.)
+
+	There are many possible strategies for storing sparse matrices in a
+	efficient ways. 
+		some of most common are  
+			so-called 
+				list of list(LIL)
+				cordinated form (COO)
+				compressed sparse column CSC 
+				compressed sparse row CSR.
+	List of list (LIL):
+		stores one list per row,with each entry containing the column index 
+		and the value. 
+		Typically these entries are kept sorted by column index 
+		for faster loolup.
+	Cordinate list (COO):
+		stores a list of (row,column,value) tuples.
+		ideally, the entries are sorted by row index and then by column index 
+		to improve random access times.
+	Compressed sparse row (CSR,CSC or Yale format):
+		represents a matrix M by three (one-dimensional) arrays, that 
+		respectively contain nonzero values, the extends of rows, and 
+		columns indices . 
+		3 arrays:
+			Array A is of length NNZ and holds all the nonzero entries of M in
+			left-to-right top-to-bottom ("row-major order").
+			
+			Array IA is length of m+1. it is defined by this recursive defintions
+				IA[0] = 0
+				IA[i] = IA[i-1] + {numbers of nonzero elements on the {i-1}+
+					the row in the original matrix}
+			
+			third array, JA , contains the column index in M of each element
+			of A and hence is of length NNZ as well.
+Ex: 1 : 
+	0	0	0	0
+	5	8	0	0
+	0	0	3	0
+	0	6	0	0
+	
+	A = [5	8	3	6]
+	IA = [0 0 2 3 4]
+	JA = [0 1 2 1]
+
+Ex : 2 :
+	10	20  0	0	0	0
+	0	30  0	40	0	0
+	0	0  50	60	70	0
+	0	0  0	0	0	80
+	
+	A : [10 20 30 40 50 60 70 80]
+	IA : [0 2 4 7 8]
+	IB : [0 1 1 3 2 3 4 5]
+	
+	Each format has some advantage and disadvantages. Most computational
+	algo (equation solving, matrix-matrix multiplication, etc) can be
+	effeciently implemented using CSR or CSC format, but they are not so
+	intuitive and not so easy to initialize.
+	so oftern a spqrse matrix is initially created in COO or LIL format
+	(where we can efficiently add elements to the sparse matrix data ),and
+	then converted CSC or CSR before used in real calculations.
+	
+	more information : http://en.wikipedia.org/wiki/Sparse_matrix.
+	
+	when we create a sparse matrix we have to choose which format it
+	should be strored in.
+	
+	operations on sparse matrix
+	
+		(A*A).todense()
+		A.dot(A).todense()
+		
+		V = array([1,2,3,4])[:,newaxis]
+		print(V)
+		
+		A*V
+		
+		A.todense() * V
+=========================================================================================
+						***** Basic Functions *****
+Interaction with NumPy
+
+	Index tricks
+	Shape manipulation
+	Polynomials
+	Vectorizing functions (vectorize)
+	Type handling
+	Other useful functions						
+	
+=============================================================================================================================================
+interpolation
+	the process of finding a value between two points on a line or a curve.
+	use when we miss some data.
+
+=========================================================================================================================================================
+The interp1d class in scipy.interpolate is a convenient method to create a function based on fixed data 
+points, which can be evaluated anywhere within the domain defined by the given data using linear 
+interpolation. 
+An instance of this class is created by passing the 1-D vectors comprising the data. 
+The instance of this class defines a __call__ method and can therefore by treated like a function which 
+interpolates between known data values to obtain unknown values . 
+Behavior at the boundary can be specified at instantiation time. 
+
+syntax : 
+	inter1d(x,y,kind='linear')	
+	where	
+		kind = 
+			linear
+			cubic
+			nearest
+			previous
+			next
+			zero
+			slinear
+			quadratic
+==========================================================================================================================================================
+interpolation using splines
+	to draw smooth curve through data points, one can use splines
+	
+	one-dimentional smoothing spline fits a given set of data points.
+	The UnivariateSpline class in scipy.interpolate is a convenient method to 
+	create a function.
+
+smoothing parameter helps to get the best fit.
+==================================================================================================

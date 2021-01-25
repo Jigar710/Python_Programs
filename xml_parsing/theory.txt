@@ -1,0 +1,152 @@
+xml parsing modules
+	xml.etree.ElementTree
+	minidom (minimal DOM)
+	
+Parsing means to read information from a file and split it into pieces by identifying 
+parts of that particular XML file. 
+=================================================================================================
+xml.etree.ElementTree Module:
+	This module helps us format XML data in a tree structure which is the most natural 
+	representation of hierarchical data. 
+	Element type allows storage of hierarchical data structures in memory and 
+	has the following properties:
+
+
+Property			Description
+Tag				It is a string representing the type of data being stored
+Attributes		Consists of a number of attributes stored as dictionaries
+Text String		A text string having information that needs to be displayed
+Tail String		Can also have tail strings if necessary
+Child Elements	Consists of a number of  child elements stored as sequences
+ElementTree 	is a class that wraps the element structure and 
+				allows conversion to and from XML. 
+=================================================================================================
+							****Read XML file****
+two ways to parse the file using ‘ElementTree’ module. 
+(1)	using parse() function 
+(2) using fromstring() function. 
+=================================================================================================
+The parse() function parses XML document which is supplied as a file whereas, 
+fromstring parses XML when supplied as a string i.e within triple quotes.
+=================================================================================================
+Using parse() function:
+	As mentioned earlier, this function takes XML in file format to parse it. 
+	Example:
+		import xml.etree.ElementTree as ET
+		mytree = ET.parse('sample.xml')
+		myroot = mytree.getroot()	
+		print(myroot)
+		
+Using fromstring() function:
+	import xml.etree.ElementTree as ET
+	data='''<?xml version="1.0" encoding="UTF-8"?>
+	<metadata>
+		<food>
+			<item name="breakfast">Idly</item>
+			<price>$2.5</price>
+			<description>Two idly's with chutney</description>
+			<calories>553</calories>
+		</food>
+	</metadata>
+	'''
+	myroot = ET.fromstring(data)
+	print(myroot)
+	
+Try
+	print(myroot.tag)
+	print(myroot.attrib)
+	print(myroot[0].tag)
+==================================================================================================
+import xml.etree.ElementTree as ET
+mytree = ET.parse('sample.xml')
+myroot = mytree.getroot()	
+print(myroot)
+
+for x in myroot[0]:
+	print(x.tag,x.attrib,x.text)
+==================================================================================================
+import xml.etree.ElementTree as ET
+mytree = ET.parse('sample.xml')
+myroot = mytree.getroot()	
+print(myroot)
+
+for x in myroot.findall('food'):
+	item = x.find('item').text
+	price = x.find('price').text
+	print(item,price)
+================================================================================================	
+					**** Update XML file ****
+set() function is used.
+
+import xml.etree.ElementTree as ET
+mytree = ET.parse('sample.xml')
+myroot = mytree.getroot()	
+for description in myroot.iter('description'):
+     new_desc = str(description.text)+'wil be served'
+     description.text = str(new_desc)
+     description.set('updated', 'yes')
+ 
+mytree.write('new.xml')					
+=========================================================================================================
+import xml.etree.ElementTree as ET
+mytree = ET.parse('sample.xml')
+myroot = mytree.getroot()	
+
+ET.SubElement(myroot[0], 'speciality')
+for x in myroot.iter('speciality'):
+     new_desc = 'South Indian Special'
+     x.text = str(new_desc)
+ 
+mytree.write('output5.xml')					
+=========================================================================================================
+						****Delete an attribute****
+	pop() method is used.
+===================================================================================================	
+	delete attribute
+	myroot[0][0].attrib.pop('name', None)
+ 
+	# create a new XML file with the results
+	mytree.write('output5.xml')
+					
+===================================================================================================	
+	delete tag
+	myroot[0].remove(myroot[0][0])
+	mytree.write('output6.xml')
+===================================================================================================	
+	myroot[0].clear()
+	mytree.write('output7.xml')
+===================================================================================================	
+								xml.dom.minidom Module
+	DOM : (Document Object module). 
+	(1) Using the parse() function:
+			use of the parse() function by supplying the XML file to be parsed as a 
+			parameter. 
+		For example:
+			from xml.dom import minidom
+			p1 = minidom.parse("sample.xml");
+			
+	(2) Using parseString() function:
+		For example:
+			p3 = minidom.parseString('<myxml>Using<empty/> parseString</myxml>')
+===================================================================================================	
+Finding Elements
+Example:
+	
+	accessing elements by getElementByTagName:
+		dat=minidom.parse('sample.xml')
+		print(dat)
+		
+		tagname= dat.getElementsByTagName('item')[0]
+		print(tagname)
+			
+	value attribute
+		dat = minidom.parse('sample.xml')
+		tagname= dat.getElementsByTagName('item')
+		print(tagname[0].attributes['name'].value)
+		
+		print(tagname[1].firstChild.data)
+		
+	Example:
+		for x in items:
+			print(x.firstChild.data)
+	

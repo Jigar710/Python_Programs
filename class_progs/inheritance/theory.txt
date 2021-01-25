@@ -1,0 +1,17 @@
+types inheritance
+	single inheritance : i11.py
+		derive a single class from a base class
+	multilevel inheritance : i12.py
+		derive a class from derived class
+	heirarchical inheritance : i13.py
+		derive many classes from same base class
+	multiple inheritance : i14.py
+		derive a class from many super classes
+	hybrid inheritance : i15.py
+		combination of more than one type of inheritance
+===========================================================================================
+method overriding : m1.py
+	same method name in both super and sub class.
+	to remove overridden method effect super() method is useful.
+	super() method we can use in child class only.
+	

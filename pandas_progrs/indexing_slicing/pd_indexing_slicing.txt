@@ -1,0 +1,173 @@
+								Indexing and slicing
+								--------------------
+								
+Pandas supports three types of multi-axis indexing.
+
+	.loc 
+		is primarily label based, but may also be used with a boolean array. 
+		.loc will raise KeyError when the items are not found. 
+		Allowed inputs are:
+			A single label, e.g. 5 or 'a' 
+			(Note that 5 is interpreted as a label of the index. 
+			This use is not an integer position along the index.).
+
+			A list or array of labels ['a', 'b', 'c'].
+
+			A slice object with labels 'a':'f' 
+			(Note that contrary to usual python slices, 
+			both the start and the stop are included, when present in the index.)
+			
+			A boolean array
+
+			A callable function with one argument (the calling Series or DataFrame) 
+			and that returns valid output for indexing (one of the above).
+
+	
+	.iloc 
+		is primarily integer position based (from 0 to length-1 of the axis), 
+		but may also be used with a boolean array. 
+		.iloc will raise IndexError if a requested indexer is out-of-bounds, 
+		except slice indexers which allow out-of-bounds indexing. 
+		
+		Allowed inputs are:
+
+			An integer e.g. 5.
+
+			A list or array of integers [4, 3, 0].
+
+			A slice object with ints 1:7.
+
+			A boolean array.
+
+			A callable function with one argument (the calling Series or DataFrame) 
+			and that returns valid output for indexing (one of the above).
+
+
+	.loc, .iloc, and also [] indexing can accept a callable as indexer. 
+----------------------------------------------------------------------------------------------------
+Getting values from an object with "multi-axes" selection uses the following notation 
+(using .loc as an example, but the following applies to .iloc as well). 
+Any of the axes accessors may be the null slice :. Axes left out of the specification 
+are assumed to be :, e.g. p.loc['a'] is equivalent to p.loc['a', :, :].
+
+Object 		Type Indexers
+Series		s.loc[indexer]
+DataFrame	df.loc[row_indexer,column_indexer]
+--------------------------------------------------------------------------------------------
+Basics	: 
+	The following table shows return type values when indexing pandas objects with []:
+
+	Object 		Type Selection			Return Value Type
+	------		--------------			-----------------
+	Series		series[label]			scalar value
+	DataFrame	frame[colname]			Series corresponding to colname
+--------------------------------------------------------------------------------------------
+1.py : loc,iloc,[]
+2.py : loc,iloc,[]
+--------------------------------------------------------------------------------------------
+3.py : 
+	list of columns as index : df[['A','B']]
+	list of labeled indexes as indexing : df.loc[[10,20]]
+	list of non-labeled indexes as indexing : df.iloc[[0,1]]
+--------------------------------------------------------------------------------------------
+4.py :
+	list of columns to set data : 
+	
+	pandas aligns all AXES when setting Series and DataFrame from .loc, and .iloc.
+	This will not modify df because the column alignment is before value assignment.
+	use method to_numpy() to set data
+--------------------------------------------------------------------------------------------
+5.py : slicing
+--------------------------------------------------------------------------------------------
+Attribute access
+	can use series/dataframe with . (dot operator) and column/labeled index 
+Ex : 6.py
+warnings
+	You can use this access only if the index element is a valid Python identifier, 
+		e.g. s.1 is not allowed. 
+	
+	The attribute will not be available if it conflicts with an existing method name, 
+		e.g. s.min is not allowed.
+
+	Similarly, the attribute will not be available if it conflicts with any of the 
+	following list: 
+		index, major_axis, minor_axis, items.
+		
+	In any of these cases, standard indexing will still work, 
+	e.g. s['1'], s['min'], and s['index'] will access the corresponding element 
+	or column.
+--------------------------------------------------------------------------------------------
+slicing 
+	with series
+		to access data
+			s[:5]
+			s[::2]
+			s[::-1]
+		to set data
+			s[:5] = 0
+	with dataframe
+		access data
+			df[:3]
+			df[::-1]
+			df.loc['a':'f']	<== carefull has to use labelled index
+			df.loc[['a','b','c'],:]
+			df.loc['d','A':'C']
+			
+		to set data
+			df.loc['c':] = 0
+		
+--------------------------------------------------------------------------------------------
+try this 
+	print(df.loc['a']>0)
+	print(df.loc[:,df1.loc['a']>0])
+	print(df['a','A'])
+--------------------------------------------------------------------------------------------
+s = pd.Series(list('abcde'),index=[0,3,2,5,4])
+print(s.loc[3:5])
+find output ....
+--------------------------------------------------------------------------------------------
+sort indexing : 7.py
+--------------------------------------------------------------------------------------------
+selection by position : iloc() : 
+	with series : 8.py
+	with dataframe : 9.py
+	
+--------------------------------------------------------------------------------------------
+boolean indexing : 10.py
+--------------------------------------------------------------------------------------------
+with lambda : 11.py	
+--------------------------------------------------------------------------------------------
+indexing with isin : 12.py
+--------------------------------------------------------------------------------------------
+where method : 13.py,13_1.py
+	boolean indexing vs where 
+	
+	print(s[s>0])		: returns data which satisfy the condition
+	print(s.where(s>0)) : returns same shape object
+--------------------------------------------------------------------------------------------
+to set values using boolean indexing
+	s2 = s.copy()
+	s[s<0] = 0
+	
+	df2 = df1.copy()
+	df2[df2<0] = 0
+to set values using where method
+	s2 = s.copy()
+	s.where(s<0,s,replace=True)
+	
+	df2 = df1.copy()
+	df2.where(df2<0,s,replace=True)
+	
+NOTE:
+	The signature for DataFrame.where() differs from numpy.where(). 
+	Roughly df1.where(m, df2) is equivalent to np.where(m, df1, df2).
+	try this : 
+		print(df.where(df < 0, -df) == np.where(df < 0, df, -df))
+--------------------------------------------------------------------------------------------
+query() method	: 14.py
+	DataFrame objects have a query() method that allows selection using an expression.
+--------------------------------------------------------------------------------------------
+
+	
+
+	

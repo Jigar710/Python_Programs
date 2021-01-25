@@ -1,0 +1,1 @@
+"{\"py/object\": \"__main__.Emp\", \"name\": \"aaa\", \"age\": 123}"

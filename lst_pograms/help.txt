@@ -1,0 +1,85 @@
+list methods
+
+	append()
+	insert()
+
+	extend()
+	
+	clear()
+	pop()
+	remove()
+
+	count()
+	
+	index()
+	
+	copy()
+	
+	reverse()
+	
+	sort()
+================================================================================================	
+
+list : 
+	use to represent a group of elements as a single entity
+	heterogeneous // mixed data type
+	repeatition allowed
+	insertion order preserved
+	mutuable : can insert and delete elements
+
+append(value)
+insert(index,value)
+	index : positive and negative indexing supports
+		  : if value out of range then will behave like an append() method
+		  
+
+extend : use to merge a list into a calling list object
+	lst1.extend(lst2)
+		will append all the values of lst2 into lst1
+		
+clear() : use to clear the list
+		: use to remove all the elements from list
+		: can not remove memory allocation
+		
+remove(value) 
+	will not return a value
+	use remove the first occurance of the given value
+	if value not found then raise exception : ValueError
+	
+pop(index=-1):
+	returns the element whihc it will remove
+	
+	if will not pass the index value then default is -1 
+	that means will remove last element from list
+	
+	positive and negative indexing supports
+	
+	if index out of range then raise exception : IndexError
+	
+count(value)
+	will return a freq (repeatition number) of a given number
+	if value not found then returns zero.
+	
+copy():
+	returns the duplicate of the list
+	
+index(value):
+	returns the index (position) of the given value but firat occurance
+	if value not found then raise exception : ValueError
+	
+reverse():
+	reverse the contents of the list itself
+	
+sort(reverse=False):	
+	use to sort the data in ascending order
+	having a single argument and value of that argument is False
+	so if want to sort the list in descending order then 
+	pass argument with value True
+		lst.sort(reverse=True)
+	
+	can apply with all strings 
+	can apply with all numbers : int,float
+	can not work with string and number as data member of list
+	
+
+		

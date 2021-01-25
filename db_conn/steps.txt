@@ -1,0 +1,37 @@
+1.
+a = input("enter email : ")
+b = input("enter pass : ")
+
+q = "select * from test where email='"+a+"' and pass='"+b+"'"
+
+
+2.
+a = aaa
+b = aaaaaa
+q = "select * from test where email='aaa' and pass='aaaaaa'"
+
+3.
+a = aaa or
+b = xyz1
+q = "select * from test where email='aaa or' and pass='xyz1'"
+
+4.
+a = aaa or 1 = 0
+b = xyz1
+q = "select * from test where email='aaa or 1 = 0' and pass='xyz1'"
+
+5.
+a = aaa' or 1 = 0
+b = xyz1
+q = "select * from test where email='aaa' or 1 = 0' and pass='xyz1'"
+
+6.
+a = aaa' or 1 = '0
+b = xyz1
+q = "select * from test where email='aaa' or 1 = '0' and pass='xyz1'"
+
+7.
+a = aaa' or '1' = '0
+b = xyz1
+q = "select * from test where email='aaa' or '1' = '0' and pass='xyz1'"
+

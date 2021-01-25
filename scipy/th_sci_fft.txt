@@ -1,0 +1,23 @@
+Scipy Fourier Transform
+	Fourier Transformation is computed on time domain signal to check its behavior in the
+	frequency domain.
+	
+	Fourier Transformation finds its application in disciplines such as singal and noise
+	processing,image processing, audio singal processing, etc.
+	
+	Scipy offers fftpack module, which lets the user compute Fast Fourier Transform.
+	
+	The FFT y[k] of length N of the length-N sequence x[n] is calculated by fft()
+	and inverse transform calculated by ifft().
+		sci_fft1.py
+================================================================================================
+Discrete Cosine Transform
+	A Discrete Cosine Transform (DCT) expresses a finite sequence of data points in 
+	terms of a sum of cosine functions oscillating at different frequencies.
+	
+	Scipy provides a DCT with a function dct and a corresponding IDCT wiht the function idct.
+	
+	The inverse discrete cosine transform reconstructs a sequence from its discrete cosine
+	transform (DCT) coefficients.
+	The idct function is an inverse of dct function.
+		sci_dct1.py

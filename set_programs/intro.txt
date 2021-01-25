@@ -1,0 +1,69 @@
+some data structure in python
+
+	data structure 
+		structure/format to hold the data
+			insert
+			delete
+			search
+			sort
+			merge
+			retrive : get
+			
+	list
+		heterogeneous
+		mutuale :can update data,insert new data,delete data
+		repated data allows
+		insertion order preserved
+		indexing : 
+			positive
+			negative
+		slicing
+			positive
+			negative
+		method:
+			copy()
+			sort()
+			append()
+			insert()
+			clear()
+			remove()
+			count()
+			pop()
+			reverse()
+			extend()
+			index()
+			
+	tuple
+		heterogeneous
+		immutuale
+		repated data allows
+		insertion order preserved
+		indexing : 
+			positive
+			negative
+		slicing
+			positive
+			negative
+		method :
+			count()
+			index()
+			
+	set
+		mutuale
+		empty : set()
+		data wrapped by {}
+		heterogeneous
+		duplicate not allows
+		does not preserved insertion order
+		does not support indexing and slicing
+		methods:
+			add() : use to add data
+			copy() : return a copy of set()
+			clear() : remove all elements
+			discard() : 
+			pop() :
+			remove():
+			
+			intersection : 
+			intersection_update : 
+	dict

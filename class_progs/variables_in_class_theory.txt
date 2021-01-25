@@ -1,0 +1,63 @@
+class
+	instance variable
+		separeted to each obj
+	class variable
+		common between all objs
+------------------------------------------------------------------------------------------
+access 
+	instance variable 
+		inside class : using self (first arg of methods of class)
+		outside class : using object name
+		
+	class variable	
+		inside class : using obj(self) or class name
+		outside class : using obj or class name
+------------------------------------------------------------------------------------------
+update 
+	instance variable
+		inside class : using obj(self)
+		outside class : using obj
+	class variable
+		inside class : using class name
+		outside class : using class name
+--------------------------------------------------------------------------------------		
+functions
+	class methods
+		have to use @classmethod decorator to declare method as class method
+		can access only class members
+		can update class variables only
+		
+		accessed by
+			inside class : 
+			outside class : class_name as well object
+	
+		
+	member function
+		no decorator required
+		can access instance variables and class variables
+		can update only instance variables
+		accessed by
+			inside class : 
+			outside class : object only
+--------------------------------------------------------------------------------------		
+accesss inside class
+					class_method					normal_method
+
+class_method		yes								No
+													using object : YES
+
+normal_method		YES (self or Class name)		YES (using self)
+
+
+access outside class
+
+normal_method 		: using object only
+class_method 		: using object and/or class name
+--------------------------------------------------------------------------------------		
+static method	
+	having no args
+	need @staticmethod decorator to inform PVM about method type
+	can be accessed by class_name and/or object outside class
+	need to use class_name to access class methods or class variables inside staticmethod.
+--------------------------------------------------------------------------------------		
+	

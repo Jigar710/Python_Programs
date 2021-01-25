@@ -1,0 +1,14 @@
+#eval() in python
+	The eval() method parses the expression passed to it and runs python 
+	expression(code) within the program.
+	
+syntax:
+
+	eval(expression, globals=None, locals=None)
+where
+
+	expression        : this string is parsed and evaluated as a Python expression
+	globals (optional): a dictionary to specify the available global methods 
+						and variables.
+	locals (optional) : another dictionary to specify the available local methods 
+						and variables.

@@ -1,0 +1,30 @@
+interpolation
+	the process of finding a value between two points on a line or a curve.
+	use when we miss some data.
+Ex : 1 : sci_inter1.py
+=========================================================================================================================================================
+inter1d class in the scipy.interpolate is a convenient method to create a function 
+based on fixed data points, which can be evaluted anywhere within the domain 
+defined be the given data using interpolation.
+
+Ex : 2 : sci_inter2.py
+syntax : 
+	inter1d(x,y,kind='linear')
+	where	
+		kind = 
+			linear
+			cubic
+			nearest
+			zero
+			slinear
+			quadratic
+==========================================================================================================================================================
+interpolation using splines
+	to draw smooth curve through data points, one can use splines
+	
+	one-dimentional smoothing spline fits a given set of data points.
+	The UnivariateSpline class in scipy.interpolate is a convenient method to 
+	create a function.
+
+	Ex : sci_inter3.py
+smoothing parameter helps to get the best fit.

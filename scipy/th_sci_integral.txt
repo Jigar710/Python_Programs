@@ -1,0 +1,77 @@
+						Integration using Scipy
+						
+scipy.integrate
+when function can not be integrated analytically or is very difficult to integrate 
+analytically, one generally turns to numerical integration methods.
+
+Scipy has number of routines for performing numerical integration.
+
+The Quad function is the workhouse of scipy's integration functions. Numerical integration
+is sometimes  called quadrature, hence the name.
+it is normally the default choice for performing single integrals of a function f(x)
+over a given fixed range from a to b.
+
+				
+Sr.No.		Function and description
+1			quad : single integration
+2			quad_vec : general purpose integration of vector-valued functions
+3			dblquad : double integration
+4			tplquad : triple integration
+5			nquad : n-dimentional integration
+6			fixed_quad : Gaussian quadrature : order n
+7			quadrature : Gaussian quadrature to given tollerance
+8			romberg : Romberg integration
+9			trapz : Use Trapezoidal rule to compute integral.
+10			cumtrapz : use Trapezoidal rule to cumulatively compute integral.
+11			simps : simpon's rule to compute integral from samples.
+12			romb : Use Romberg integration to compute integral from (2**k+1) evenly-spaced samples.
+13			Polyint : Analytical polynomial integration(numpy)
+14			Poly1d : Helper function to Polyint(numpy)
+
+Ex:
+				b
+			integrals	f(x)
+				a
+
+	scipy.integrate.quad(f,a,b)
+	where, 
+		  f is a function
+		  a : lower limit
+		  b : upper limit
+		  
+===================================================================================================
+Integtaion
+	The quad function returns the two values, in whih the first number is the value of 
+	integral and the second value is the estimate of the absolute error in the value of integral.
+		sci_integrate_1.py
+		sci_integrate_2.py
+		sci_integrate_3.py
+===================================================================================================
+Integration using scipy
+	The general form of dblquad is 
+		scipy.integrate.dblquad(fun,a,b,gfun,hfun)
+	where 
+		func : name of function to be integrated
+		a 	 : lower limit of the x variable
+		b 	 : upper limit of the x variable
+		gfunc: function that defines lower limit for variable y
+		hfunc: function that defines upper limit for variable y
+			1/2				sqrt(1-4*y**2)
+		Integrate	dx	  Integrate		16xy dy
+			0				0
+			
+		sci_integrate_4.py
+===================================================================================================
+Integration with arguments
+	if we need to pass extra arguments to integrand function we can use 
+		args keyword arguments.
+	
+	scipy.special.jn ==> bassel function : 
+		bessel functions are functons for the occilating curves where amplitude damples 
+		over time
+		
+	sci_integrate_5.py
+	
+	to integrate jn function
+		sci_integrate_6.py
+===================================================================================================

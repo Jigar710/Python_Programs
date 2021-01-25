@@ -1,0 +1,8 @@
+syntax
+	create_engine(dialect+driver://username:password@host:port/database)
+	
+	
+	query = 
+		'select customers.name,customers.phone_number,orders.name,orders.amount 
+		from customers inner join orders on (orders.customer_id = customers.id)'
+		

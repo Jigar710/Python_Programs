@@ -1,0 +1,14 @@
+data structure in python
+data structure : 
+	list
+		duplicates allow
+		insertion order is preserved
+		empty list : [],list()
+		initialize : [2,2,3]
+		heterogeneous
+		index value : support
+				    : starts with 0
+					: ends with len(lst)-1
+					: support +ve and -ve indexing
+		mutable
+		

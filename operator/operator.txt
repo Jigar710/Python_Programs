@@ -1,0 +1,493 @@
+Operators in python
+	Arithmetic operators
+		Arithmetic operators are used to perform mathematical operations like 
+			addition, subtraction, multiplication, etc.
+
+Operator	Meaning	Example
++			Add two operands or unary plus	x + y + 2
+-			Subtract right operand from the left or unary minus	x - y- 2
+*			Multiply two operands	x * y
+/			Divide left operand by the right one (always results into float)	x / y
+%			Modulus - remainder of the division of left operand by the right	
+			x % y (remainder of x/y)
+//			Floor division - division that results into whole number adjusted 
+			to the left in the number line	x // y
+**			Exponent - left operand raised to the power of right	x**y (x to the power y)
+
+Example 1: Arithmetic operators in Python
+x = 15
+y = 4
+
+# Output: x + y = 19
+print('x + y =',x+y)
+
+# Output: x - y = 11
+print('x - y =',x-y)
+
+# Output: x * y = 60
+print('x * y =',x*y)
+
+# Output: x / y = 3.75
+print('x / y =',x/y)
+
+# Output: x // y = 3
+print('x // y =',x//y)
+
+# Output: x ** y = 50625
+print('x ** y =',x**y)
+===========================================================================================
+Comparison operators
+	Comparison operators are used to compare values. 
+	It returns either True or False according to the condition.
+
+Operator	Meaning	Example
+>			Greater than - True if left operand is greater than the right	x > y
+<			Less than - True if left operand is less than the right	x < y
+==			Equal to - True if both operands are equal	x == y
+!=			Not equal to - True if operands are not equal	x != y
+>=			Greater than or equal to - True if left operand is greater than or equal to the right	x >= y
+<=			Less than or equal to - True if left operand is less than or equal to the right	x <= y
+
+Example 2: Comparison operators in Python
+x = 10
+y = 12
+
+# Output: x > y is False
+print('x > y is',x>y)
+
+# Output: x < y is True
+print('x < y is',x<y)
+
+# Output: x == y is False
+print('x == y is',x==y)
+
+# Output: x != y is True
+print('x != y is',x!=y)
+
+# Output: x >= y is False
+print('x >= y is',x>=y)
+
+# Output: x <= y is True
+print('x <= y is',x<=y)
+=====================================================================================================
+Logical operators
+
+Logical operators are the and, or, not operators.
+
+Operator	Meaning	Example
+and	True if both the operands are true	x and y ==> a>b and a>c
+or	True if either of the operands is true	x or y
+not	True if operand is false (complements the operand)	not x
+
+Example 3: Logical Operators in Python
+x = True
+y = False
+
+print('x and y is',x and y)
+
+print('x or y is',x or y)
+
+print('not x is',not x)
+
+x and y is False
+x or y is True
+not x is False
+Here is the truth table for these operators.
+=================================================================================================
+Bitwise operators
+Bitwise operators act on operands as if they were strings of binary digits. 
+They operate bit by bit, hence the name.
+
+For example, 2 is 10 in binary and 7 is 111.
+
+In the table below: Let x = 10 (0000 1010 in binary) and y = 4 (0000 0100 in binary)
+
+Operator	Meaning	Example
+&			Bitwise AND	x & y = 0 (0000 0000)
+|			Bitwise OR	x | y = 14 (0000 1110)
+~			Bitwise NOT	~x = -11 (1111 0101)
+^			Bitwise XOR	x ^ y = 14 (0000 1110)
+>>			Bitwise right shift	x >> 2 = 2 (0000 0010)
+<<			Bitwise left shift	x << 2 = 40 (0010 1000)
+==============================================================================================
+Assignment operators (RTL : right to left) 
+Assignment operators are used in Python to assign values to variables.
+
+a = 5 is a simple assignment operator that assigns the value 5 on the right to 
+the variable a on the left.
+
+There are various compound operators in Python like a += 5 that adds to the variable and 
+later assigns the same. 
+It is equivalent to a = a + 5.
+
+Operator	Example	Equivalent to
+=			x = 5	x = 5
++=			x += 5	x = x + 5
+-=			x -= 5	x = x - 5
+*=			x *= 5	x = x * 5
+/=			x /= 5	x = x / 5
+%=			x %= 5	x = x % 5
+//=			x //= 5	x = x // 5
+**=			x **= 5	x = x ** 5
+&=			x &= 5	x = x & 5
+|=			x |= 5	x = x | 5
+^=			x ^= 5	x = x ^ 5
+>>=			x >>= 5	x = x >> 5
+<<=			x <<= 5	x = x << 5
+============================================================================================
+Special operators
+	Python language offers some special types of operators like the identity operator 
+	or the membership operator. 
+	
+
+Identity operators
+	is and is not are the identity operators in Python. 
+	They are used to check if two values (or variables) are located on the same part 
+	of the memory. 
+	Two variables that are equal does not imply that they are identical.
+
+Operator	Meaning	Example
+is			True if the operands are identical (refer to the same object)	
+			x is True
+is not		True if the operands are not identical (do not refer to the same object)	
+			x is not True
+Example 4: Identity operators in Python
+x1 = 5
+y1 = 5
+x2 = 'Hello'
+y2 = 'Hello'
+x3 = [1,2,3]
+y3 = [1,2,3]
+
+# Output: False
+print(x1 is not y1)
+
+# Output: True
+print(x2 is y2)
+
+# Output: False
+print(x3 is y3)
+
+Here, we see that x1 and y1 are integers of the same values, so they are equal as well 
+as identical. 
+Same is the case with x2 and y2 (strings).
+
+But x3 and y3 are lists. 
+They are equal but not identical. 
+It is because the interpreter locates them separately in memory although they are equal.
+===========================================================================================
+Membership operators
+	in and not in are the membership operators in Python. 
+	They are used to test whether a value or variable is found in a sequence 
+	(string, list, tuple, set and dictionary).
+
+	In a dictionary we can only test for presence of key, not the value.
+
+Operator	Meaning	Example
+in			True if value/variable is found in the sequence	5 in x
+not in		True if value/variable is not found in the sequence	5 not in x
+
+Example #5: Membership operators in Python
+x = 'Hello world'
+y = {1:'a',2:'b'}
+
+# Output: True
+print('H' in x)
+
+# Output: True
+print('hello' not in x)
+
+# Output: True
+print(1 in y)
+
+# Output: False
+print('a' in y)
+
+Here, 'H' is in x but 'hello' is not present in x 
+	(remember, Python is case sensitive). 
+Similarly, 1 is key and 'a' is the value in dictionary y. 
+Hence, 'a' in y returns False.
+============================================================================================
+operator — Standard operators as functions
+	The operator module exports a set of efficient functions corresponding to the 
+	intrinsic operators of Python. 
+	For example, operator.add(x, y) is equivalent to the expression x+y. 
+	The function names are those used for special class methods; 
+	variants without leading and trailing __ are also provided for convenience.
+
+	The functions fall into categories that perform 
+		object comparisons, 
+		logical operations, 
+		mathematical operations and 
+		sequence operations.
+
+	The object comparison functions are useful for all objects, and are named after 
+	the rich comparison operators they support:
+
+operator.lt(a, b)		
+operator.le(a, b)
+operator.eq(a, b)
+operator.ne(a, b)
+operator.ge(a, b)
+operator.gt(a, b)
+operator.__lt__(a, b)
+operator.__le__(a, b)
+operator.__eq__(a, b)
+operator.__ne__(a, b)
+operator.__ge__(a, b)
+operator.__gt__(a, b)
+
+=================================================================================================
+operator.not_(obj)				
+operator.__not__(obj)
+	Return the outcome of not obj. 
+	(Note that there is no __not__() method for object instances; only the 
+	interpreter core defines this operation. 
+	The result is affected by the __bool__() and __len__() methods.)
+
+operator.truth(obj)
+	Return True if obj is true, and False otherwise. 
+	This is equivalent to using the bool constructor.
+
+operator.is_(a, b)
+	Return a is b. Tests object identity.
+
+operator.is_not(a, b)
+	Return a is not b. Tests object identity.
+===========================================================================================
+The mathematical and bitwise operations are the most numerous:
+
+operator.abs(obj)
+operator.__abs__(obj)
+	Return the absolute value of obj.
+
+operator.add(a, b)
+operator.__add__(a, b)
+	Return a + b, for a and b numbers.
+
+operator.and_(a, b)
+operator.__and__(a, b)
+	Return the bitwise and of a and b.
+
+operator.floordiv(a, b)
+operator.__floordiv__(a, b)
+	Return a // b.
+
+operator.index(a)
+operator.__index__(a)
+	Return a converted to an integer. Equivalent to a.__index__().
+
+operator.inv(obj)
+operator.invert(obj)
+operator.__inv__(obj)
+operator.__invert__(obj)
+	Return the bitwise inverse of the number obj. This is equivalent to ~obj.
+
+operator.lshift(a, b)
+operator.__lshift__(a, b)
+	Return a shifted left by b.
+
+operator.mod(a, b)
+operator.__mod__(a, b)
+	Return a % b.
+
+operator.mul(a, b)
+operator.__mul__(a, b)
+	Return a * b, for a and b numbers.
+
+operator.neg(obj)
+operator.__neg__(obj)
+	Return obj negated (-obj).
+
+operator.or_(a, b)
+operator.__or__(a, b)
+	Return the bitwise or of a and b.
+
+operator.pos(obj)
+operator.__pos__(obj)
+	Return obj positive (+obj).
+
+operator.pow(a, b)
+operator.__pow__(a, b)
+	Return a ** b, for a and b numbers.
+
+operator.rshift(a, b)
+operator.__rshift__(a, b)
+	Return a shifted right by b.
+
+operator.sub(a, b)
+operator.__sub__(a, b)
+	Return a - b.
+
+operator.truediv(a, b)
+operator.__truediv__(a, b)
+	Return a / b where 2/3 is .66 rather than 0. This is also known as “true” division.
+
+operator.xor(a, b)
+operator.__xor__(a, b)
+	Return the bitwise exclusive or of a and b.
+===========================================================================================
+Operations which work with sequences (some of them with mappings too) include:
+
+operator.concat(a, b)
+operator.__concat__(a, b)
+	Return a + b for a and b sequences.
+
+operator.contains(a, b)
+operator.__contains__(a, b)
+	Return the outcome of the test b in a. Note the reversed operands.
+
+operator.countOf(a, b)
+	Return the number of occurrences of b in a.
+
+operator.delitem(a, b)
+operator.__delitem__(a, b)
+	Remove the value of a at index b.
+
+operator.getitem(a, b)
+operator.__getitem__(a, b)
+	Return the value of a at index b.
+
+operator.indexOf(a, b)
+	Return the index of the first of occurrence of b in a.
+
+operator.setitem(a, b, c)
+operator.__setitem__(a, b, c)
+	Set the value of a at index b to c.
+
+==========================================================================================================
+Mapping Operators to Functions
+	This table shows how abstract operations correspond to operator symbols in the 
+	Python syntax and the functions in the operator module.
+
+Operation			Syntax			Function
+Addition			a + b			add(a, b)
+Concatenation		seq1 + seq2		concat(seq1, seq2)
+Containment Test	obj in seq		contains(seq, obj)
+Division			a / b			truediv(a, b)
+Division			a // b			floordiv(a, b)
+Bitwise And			a & b			and_(a, b)
+Bitwise Exclusive Or	a ^ b		xor(a, b)
+Bitwise Inversion	~ a				invert(a)
+Bitwise Or			a | b			or_(a, b)
+Exponentiation		a ** b			pow(a, b)
+Identity			a is b			is_(a, b)
+Identity			a is not b		is_not(a, b)
+Indexed Assignment	obj[k] = v		setitem(obj, k, v)
+Indexed Deletion	del obj[k]		delitem(obj, k)
+Indexing			obj[k]			getitem(obj, k)
+Left Shift			a << b			lshift(a, b)
+Modulo				a % b			mod(a, b)
+Multiplication		a * b			mul(a, b)
+Negation (Arithmetic)- a			neg(a)
+Negation (Logical)	not a			not_(a)
+Positive			+ a				pos(a)
+Right Shift			a >> b			rshift(a, b)
+Slice Assignment	seq[i:j] = values	setitem(seq, slice(i, j), values)
+Slice Deletion		del seq[i:j]	delitem(seq, slice(i, j))
+Slicing				seq[i:j]		getitem(seq, slice(i, j))
+String Formatting	s % obj			mod(s, obj)
+Subtraction			a - b			sub(a, b)
+Truth Test			obj				truth(obj)
+Ordering			a < b			lt(a, b)
+Ordering			a <= b			le(a, b)
+Equality			a == b			eq(a, b)
+Difference			a != b			ne(a, b)
+Ordering			a >= b			ge(a, b)
+Ordering			a > b			gt(a, b)
+============================================================================================
+Inplace Operators
+	Many operations have an “in-place” version. 
+	Listed below are functions providing a more primitive access to in-place operators 
+	than the usual syntax does; 
+	for example, the statement 
+	x += y is equivalent to 
+	x = operator.iadd(x, y). 
+	
+	Another way to put it is to say that 
+	z = operator.iadd(x, y) is equivalent to the compound statement 
+		z = x; 
+		z += y.
+
+In those examples, note that when an in-place method is called, 
+the computation and assignment are performed in two separate steps. 
+The in-place functions listed below only do the first step, calling the in-place 
+method. 
+The second step, assignment, is not handled.
+
+For immutable targets such as strings, numbers, and tuples, the updated value is 
+computed, but not assigned back to the input variable:
+
+Example : 
+	a = 'hello'
+	print(iadd(a, ' world'))
+	print(a)
+	
+	output : 
+	
+	'hello world'
+	'hello'
+=================================================================================================
+For mutable targets such as lists and dictionaries, the inplace method will perform 
+the update, so no subsequent assignment is necessary:
+
+Example : 
+	s = ['h', 'e', 'l', 'l', 'o']
+	print(iadd(s, [' ', 'w', 'o', 'r', 'l', 'd']))
+	print(s)
+output
+	['h', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd']
+	['h', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd']
+================================================================================================	
+operator.iadd(a, b)
+operator.__iadd__(a, b)
+	a = iadd(a, b) is equivalent to a += b.
+
+operator.iand(a, b)
+operator.__iand__(a, b)
+	a = iand(a, b) is equivalent to a &= b.
+
+operator.iconcat(a, b)
+operator.__iconcat__(a, b)
+	a = iconcat(a, b) is equivalent to a += b for a and b sequences.
+
+operator.ifloordiv(a, b)
+operator.__ifloordiv__(a, b)
+	a = ifloordiv(a, b) is equivalent to a //= b.
+
+operator.ilshift(a, b)
+operator.__ilshift__(a, b)
+	a = ilshift(a, b) is equivalent to a <<= b.
+
+operator.imod(a, b)
+operator.__imod__(a, b)
+	a = imod(a, b) is equivalent to a %= b.
+
+operator.imul(a, b)
+operator.__imul__(a, b)
+	a = imul(a, b) is equivalent to a *= b.
+
+operator.ior(a, b)
+operator.__ior__(a, b)
+	a = ior(a, b) is equivalent to a |= b.
+
+operator.ipow(a, b)
+operator.__ipow__(a, b)
+	a = ipow(a, b) is equivalent to a **= b.
+
+operator.irshift(a, b)
+operator.__irshift__(a, b)
+	a = irshift(a, b) is equivalent to a >>= b.
+
+operator.isub(a, b)
+operator.__isub__(a, b)
+	a = isub(a, b) is equivalent to a -= b.
+
+operator.itruediv(a, b)
+operator.__itruediv__(a, b)
+	a = itruediv(a, b) is equivalent to a /= b.
+
+operator.ixor(a, b)
+operator.__ixor__(a, b)
+	a = ixor(a, b) is equivalent to a ^= b.	
+==============================================================================================

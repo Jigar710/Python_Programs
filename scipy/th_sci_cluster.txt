@@ -1,0 +1,16 @@
+Scipy Cluster
+	Generally not useful, people uses sklearn clustering package
+	
+	K-means clustering is a method for finding a clusters and cluster centers
+	in a set of unlabelled data.
+	
+	Given an initial set of K centers, the K-means algorithm iterates the 
+	following two steps -
+		For each center, the subset of training points (its cluster) that is closer
+		to it is identified than any other center.
+		
+		The mean of each feature of the data points in each cluster are computed,
+		and this mean vector becomes the new center for that cluster.
+		
+		
+	sci_cluster1.py

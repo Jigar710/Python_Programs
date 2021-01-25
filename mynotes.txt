@@ -1,0 +1,970 @@
+#generator
+memory and time consumeing and only store formula in memory
+lst = (i for i in range(100000000))    #it is a generator
+=>'yield' keyword
+(past: time.clock())
+current: time.perf_counter()
+         time.time()
+-------------------------------------------------------------------------------------------------------
+#recursion
+i = 1
+def disp():
+	global i
+	print("hello")
+	i = i + 1
+	if(i<=5):
+		show()
+	print("bye from disp")
+def show():
+	global i
+	print("hi")
+	i = i + 1
+	if(i<=5):
+		disp()
+	print("bye from show")
+print("before recursion")
+show()
+print("after recursion")
+
+output:
+before recursion
+hi
+hello
+hi
+hello
+hi
+bye from show
+bye from disp
+bye from show
+bye from disp
+bye from show
+after recursion
+
+fuction is not execute after the return a value
+-------------------------------------------------------------------------------------------------------
+#class
+'self'keyword is not inbuild but normal intense method's first argument is object variable and that's self
+__str__,__doc__ is called magic method
+__str__ is autometically called by print(object_name) that means "print(m2.__str__)"
+
+note: how to store and update variable value in python
+	=>python have weird way to store variable
+	->int,float  is same value store in same memory location and if once changes, value will be copied other memory location
+    ->list,classObject  if once changes, all will be change in same way
+
+in-build decorator
+=>@classmethod :
+	->have to use @classmethod decorator to declare method as class method
+	->can access only class members
+	->can update class variables only
+=>@staticmethod :
+	->having no args
+	->need @staticmethod decorator to inform PVM about method type
+	->can be accessed by class_name and/or object outside class
+	->need to use class_name to access class methods or class variables inside staticmethod.
+=>@property  :
+    ->@property(default: variable_name.getter) & @variable_name.getter
+	
+Visibility:
+=> python don't have any privacy functionality
+__variablename is only store in memory with name "_class__variablename"	
+	
+	
+__init__ is like constructor but it is not.
+__new__ is a real constructor because it is called when object is created and __new__ is always return something and __new__ is internally call __init__ .
+
+if(__name__=='__main__'):
+main body part 
+it is used when python file is used as file or module also.
+
+method overriding : m1.py
+	same method name in both super and sub class.
+	to remove overridden method effect super() method is useful.
+	super() method we can use in child class only.
+-------------------------------------------------------------------------------------------------------	
+#pip install mysql-connector
+#pip3 install mysql-connector
+
+import mysql.connector as db
+
+con = db.connect(host="localhost",user="root",password=""[,database_name])
+q = "create database python_db";
+cur = con.cursor()
+cur.execute(q)
+
+=>but some queries return value like display table:
+lst = cur.fetchall(); print(lst)
+
+=>multi values enter
+q = "insert into users values (%s,%s,%s)"      # in this way we can not sql-injection
+cur.executemany(q,data)
+
+con.commit()       # update the table or main operation is odne in main database
+
+=>sql injection risk in this :
+u = input("Enter user name : "); p = input("Enter password : ")
+q = "select * from users where name = '"+u+"' and pass = '"+p+"'"
+cur.execute(q)
+==> q = "select * from test where email='aaa' or '1' = '0' and pass='xyz1'"  #always true
+
+#sqlite3
+import sqlite3
+con = sqlite3.connect('abcd.db')
+cur = con.cursor()
+cur.execute()
+---------------------------------------------------------------------------------------------------
+open() : open file and return file object
+	open(file_name[,mode])
+	close()
+	read([num_of_char])
+	readline()
+	readlines()
+	write()
+	writelines()
+	seek() :  seek(position[,0 or 1 or 2])
+			0 : default - begining of file
+			1 : current position
+			2 : end of file
+		=> when we use 0,1,2 in second argument, we must use binary mode with current mode
+			NOTE:
+			f = open('data.txt','rb')
+			f.seek(4,1)
+	tell()
+pickle : use for serialization
+	load()	: read object from file
+	dump()	: write object into file
+	loads()	: read object from variable
+	dumps()	: write binary of object into variable
+json
+	load()	: read object from file 
+	dump()	: write object into file (hint : use __dict__ )
+	loads()
+	dumps()
+jsonpickle
+	encode()
+	decode()
+	load()
+	dump()
+
+modes 
+r	Opens a file for reading. (default)
+w	Opens a file for writing. 
+	Creates a new file if it does not exist or truncates the file if it exists.
+x	Opens a file for exclusive creation. 
+	If the file already exists, the operation fails.
+	opens file for writing mode if file does not exists
+a	Opens a file for appending at the end of the file without truncating it. 
+	Creates a new file if it does not exist.
+t	Opens in text mode. (default)
+b	Opens in binary mode.
++	Opens a file for updating (reading and writing)
+rb : read + binary
+wb : write + binary
+rw+ : read and write both
+
+note: 
+print(f.read(1).decode('utf-8'))
+f.seek(16,1)
+print(f.read(1).decode('utf-8'))
+f.seek(-1,2)
+print(f.read().decode('utf-8'))
+---------------------------------------------------------------------------------------------------
+#threading : multiple process run simultaneously
+import threading
+th1 = threading.Thread(target = firstmethod)
+
+gives current thread name ==> threading.current_thread().name
+th1.start()   ==> start thread
+start(self)
+ |      Start the thread's activity.
+ |
+ |      It must be called at most once per thread object. It arranges for the
+ |      object's run() method to be invoked in a separate thread of control.
+ |
+ |      This method will raise a RuntimeError if called more than once on the
+ |      same thread object.
+
+#join method
+t1.join() it means main-thread will wait for finishing t1 thread 
+[join(self, timeout=None)
+ |      Wait until the thread terminates.]
+
+#Daemon thread : service thread
+th1 = threading.Thread(target = firstmethod, daemon = True)
+or  th1.setDaemon(True)
+=>if thread is daemon, it will run till main thread is running
+=>when main thread is completed, daemon threads is stop working automatically.
+
+#not allowed to set deamon property "after" start execution of threads.
+t1.start()
+t1.setDaemon(True)       # it is not valid
+
+th1.isDaemon()    => return true or false
+
+=> main thread is not daemon by default
+if parent thread is not daemon, child thread is also not daemon
+if parent thread is daemon, child thread is also daemon
+
+=>if we are doing updation of data by two thread, lost update will happen...
+so, we should syncronization by creating thread subclass, run method and LOCK
+
+run(self)
+ |      Method representing the thread's activity.when thread starts run() method is automatic invoke.
+
+Example:
+import threading
+from threading import Lock
+import time
+
+class database:
+    def __init__(self):
+        self.value = 100
+        self.l = Lock()
+    def update(self,amount):
+        self.l.acquire()
+        copy = self.value
+        copy += amount
+        time.sleep(2)
+        self.value = copy
+        print("Value is udated")
+        self.l.release()
+    def __str__(self):
+        s = "Value = "+ str(self.value)
+        return s
+
+class mythread(threading.Thread):
+    def __init__(self,d,amount):
+        self.d = d
+        self.amount = amount
+        super().__init__()
+    def run(self):
+        print(self.d)
+        self.d.update(self.amount)
+        print(self.d)
+
+d1 = database()
+
+th1 = mythread(d1,10)
+th2 = mythread(d1,20)
+th1.start()
+th2.start()
+
+producer and consumer situation :
+one resource and two user - producer and consumer
+Example:
+from threading import Thread,Condition
+class res:
+	def __init__(self):
+		self.value = 0
+		self.cv = Condition()
+		self.flag = True
+		
+	def set(self,value):
+		self.cv.acquire()
+		while(self.flag == False):
+			self.cv.wait()
+		self.value = value
+		print("set : ",self.value)
+		self.flag = False
+		self.cv.notify()
+		self.cv.release()
+		
+	def get(self):
+		self.cv.acquire()
+		while(self.flag==True):
+			self.cv.wait()
+		print("get : ",self.value)
+		self.flag = True
+		self.cv.notify()
+		self.cv.release()
+
+class Producer(Thread):
+	def __init__(self,r):
+		self.r = r
+		super().__init__()
+	def run(self):
+		for i in range(1,11):
+			self.r.set(i)
+
+class Consumer(Thread):
+	def __init__(self,r):
+		self.r = r
+		super().__init__()
+
+	def run(self):
+		for i in range(1,11):
+			self.r.get()
+
+r = res()
+t1 = Producer(r)
+t2 = Consumer(r)
+
+t2.start()
+t1.start()
+----------------------------------------------------------------------------------------------------
+=>Networking
+Server:
+	import socket
+	ip = socket.gethostname()
+	port = 1600
+	s = socket.socket()
+	s.bind((ip,port))
+	s.listen(1)
+	con,add = s.accept()
+	while True:
+		msg = input("Enter msg : " )
+		con.send(msg.encode())
+		if msg=='bye':
+			break;
+		msg = con.recv(1024).decode()
+		print("client says :",msg)	
+		if msg=='bye':
+			break;
+
+Client:
+	import socket
+	ip = socket.gethostname()
+	port = 1600
+	s = socket.socket()
+	s.connect((ip,port))
+	while True:
+		msg = s.recv(1024).decode()
+		print("server says :",msg)
+		if msg=='bye':
+			break;	
+		msg = input("Enter msg : ")
+		s.send(msg.encode())		
+		if msg=='bye':
+			break;
+			
+you can use multithreading for multi process in a time
+you can use pass data json or pickle module
+----------------------------------------------------------------------------------------------------
+Exception:
+except:  => keyword handle all the exception
+
+except Exception as e:
+	print(e)#e.__str__()
+	
+except ValueError:
+	print("plz enter int value")
+except TypeError:
+	print("index type must be int")
+except ZeroDivisionError:
+	print("cant divide by zero")
+	
+# multiple except block
+except (ValueError,ZeroDivisionError):
+	print("Enter proper data")
+except TypeError:
+	print("index type must be int")
+
+#except block with default except block	
+except ValueError:
+	print("Enter proper data")
+except Exception as e: #default except block
+	print("some problem ",e)
+
+except Exception as e: #default except block
+	print("some problem ",e)
+except ValueError:
+	print("Enter proper data")   # it will not use for handling of exception
+	
+if(a<0 or b<0):
+		raise ValueError("negative value")      # we can raise error by raise keyword
+
+Example:
+class A(Exception):
+	def disp1(self):
+		print("from A")
+class B(A):
+	def disp2(self):
+		print("from B")
+class C(B):
+	def disp3(self):
+		print("from C")
+for i in (A,B,C):		
+	try:
+		raise i
+	except B as b:		# B and C error handle by only B because of it is superclass of C.
+		b.disp2()
+	except C as c:		
+		c.disp3()
+	except A as a:		
+		a.disp1()	
+----------------------------------------------------------------------------------------------------
+numpy 
+	short of numerical python, is one of the most important foundational packages for
+	numerical computing in python.
+Points
+	ndarray, an efficient multidimensional array providing fast array-oriented arithmetic
+	operations and flexible broadcasting capabilites.
+		
+	Mathematical functions for fast operations on entire arrays of data without having to
+	write loops.
+	
+	Tools for reading/writing array data to disk and working with memory mapped files.
+	
+	Linear algebra, random number generation and Fourier Transform capabilities.
+	
+	A C API for connecting NumPy with libs writtern in C,C++ and FORTRAN.
+	
+===================================================================================================
+Why Study NumPy?
+	while NumPy by itself does not provide modeling or scientific functionalities,
+	having an  understanding of Numpy array and array-oriented computing will help us
+	to use tools with array-oriented semantics, like pandas much more effectively.
+	
+	NumPy internally stores data in a contiguous block of memory, independent of other
+	build-in Python objects. NumPy's Library of algorithms wirtten in c lang can operate
+	on this memory without any type checking or other overhead.
+	
+	NumPy array also use much less memory than build-in python seq.
+	
+	NumPy operations perform complex computations on entire arrays without the need of 
+	Python for loops. 
+
+===================================================================================================
+Prog1.py : speed comparasion of numpy array and python seq(list) execution
+NumPy based algo are generally 10 to 100 times faster than their pure python counterparts 
+and use significantly less memory.
+===================================================================================================
+The NumPy ndarray : A multidimensional Array Object
+	NumPy enables batch computationas with similar syntax to scalar values on built-in 
+	Python Objects.
+	N-dimensional array object, or ndarray
+	An ndarray is a generic multidimensional container for homogeneous data .
+	
+	Every array has a shape, a tuple indicatig the size of each dimension and a dtype, 
+	an object describing the data type of the array.
+	
+	prog2.py
+===================================================================================================
+Creating ndarray
+	The easiest way to create an array is to use array function. This accepts any 
+	seq-like object (including other arrays) and products a new NumPy array containing the 
+	passed data.
+	Nested sequences, like a list of equal length lists wil be converted into a multidimensional
+	array
+	np.array tries to infer a good data type for the array that it creates.
+	
+	prog3.py
+===================================================================================================
+Array creation Functions
+		
+	functions					description
+	
+	array		converting input data(list,tuple,array or other seq type) to an ndarray either
+				by unferring a dtype or explicitly specifing dtype; copies the input data type
+				by default
+				
+	asarray		convert input to ndarray, but do not copy if input is already array returns ref.
+	
+	arange		Like range(), byt returns ndarray
+				default dtype is int32
+
+	linspace    linspace(start,end,number of part)
+                ex:
+                >>>print(np.linspace(0,5,20))
+                 op:   [0.         0.26315789 0.52631579 0.78947368 1.05263158 1.31578947
+                       1.57894737 1.84210526 2.10526316 2.36842105 2.63157895 2.89473684
+                       3.15789474 3.42105263 3.68421053 3.94736842 4.21052632 4.47368421
+                       4.73684211 5.        ]
+	
+	ones		Produce an array with all 1s with given shape and dtype
+	ones_like	takes another array and Produces a ones array of same shape and dtype.
+	
+	zeros
+	zeros_like
+	
+	empty
+	empty_like
+	
+	full		Produces an array of the given shape and dtype with all values set to the 
+				indicated 'fill value'
+	full_like
+
+	eye,identity create a square N*N identity matrix (1s on the diagonal and 0s elsewhere).
+=====================================================================================================
+	prog4.py
+	prog5.py
+=====================================================================================================
+Data Types for ndarrays : prog9.py
+	can write float in the place of np.float64 
+	NumPy aliases the Python types to its own equivalent data dtypes.
+	
+	we can also use another array's dtype attributes.
+	
+	There are shorthand type code strings(like u4) 
+	we can also use to refer to a dtype.	
+=====================================================================================================
+Numpy Data types
+	Numpy type		Type Code 		Description
+	int8,uint8		i1,u1			Signed and unsined 8 bit (1 byte) int types.
+	int16,uint16	i2,u2			Signed and unsined 16 bit (2 byte) int types.
+	int32,uint32	i4,u4			Signed and unsined 32 bit (4 byte) int types.
+	int64,uint64	i8,u8			Signed and unsined 64 bit (8 byte) int types.
+	
+	float16			f2				half percision floating point
+	float32			f4 or f			Standard single precision floating point			
+									compatiable with C float
+	float64/float	f8 or d			Standard double precision floating point			
+									compatiable with C double
+									and python float object
+	float128		f16 or g		Extended precision floating point			
+					
+	complex64		c8				Complex number represented by two 32,64 and 128 floats
+									respectively.
+	complex128		c16
+	complex256		c32
+
+	bool			?				Boolean Types, Stores True or False value
+	
+	object			O				Python object type a value can be any python object
+	string_			S				Fixed length ASCII string type (1 byte per char
+									ex: to create string type with length 10 : 'S10'
+	unicode_		U				Fixed length Uniocde string type 
+									(number of bytes platform specific)
+									same semantics as in string : 'U10'
+=====================================================================================================
+Arithmetic with Numpy arrays : prog10.py
+
+	Arrays are important bcoz they enable us to express batch operations on data
+	without wirting any of loops.
+	NumPy users call this "Vectorization".
+	
+	Any arithmetic operation between equal-size array applies the operation element-wise.
+	
+	Arithmetic operation with scalars propogate the scalar argument to each element 
+	in the array.
+=====================================================================================================
+	prog11.py
+	
+	Comparisons between arrays of the same size yield boolean arrays 
+	
+	Operations between differently sized arrays called broadcasting.
+=====================================================================================================
+Basic indexing and slicing : prog6.py,prog7.py,prog8.py
+	NumPy array indexing is a rich topic, as there are many ways you may
+	want to sleect a subset of your data or indiviaul elements.
+	
+	As we can seem if we assign a scalar value to a slice, as in
+	arr[5:8] = 12, the value is propagated (or broadcasted henceforth) to 
+	entier selection.
+	
+	an important first distinction from python's built-in lists 
+	is that slices are views on the original array.
+	
+	this means that the data is not copied, and any modifications to the view
+	will be reflected in the source array.
+========================================================================================================
+	prog12.py,prog13.py
+	
+	if we want a copy of slicce of an ndarray instead of a view, we will need to explicitly
+	copy the array : ex :arr[5:8].copy().
+	
+	in 2-D array, the elements at each index are  no longer 
+	scalars but rather 1D arrays.
+========================================================================================================
+Basic indexing and slicing : prog15.py
+
+In multidimensional arrays, if we omit later indices, the returned object will be
+a lower dimensional ndarray consisiting of all the data along the higher 
+dimensions.
+Both scalar values and arrays can be assigned to arr4d[0].
+
+Note that in all of these cases where subsections of the array have 
+been selected, the returned arrays are views.
+========================================================================================================
+Indexing with Slices : prog14.py
+	arr2d[:2] sliced along with axis 0, the first axis.
+	A slice, therefore,selects a range of elements along a axis.
+	
+	we can pass multiple slices jist like we can passmultiple indexes.
+========================================================================================================
+Boolean indexing : prog16.py,prog17.py
+========================================================================================================
+Fancy indexing : prog18.py,prog19.py
+
+	Fancy indexing is a term adapted by numpy to describe indexing using integer arrays.
+	
+	To select out a subset of the rows in a particular order, we can simply pass a 
+	list of ndarray of integers specifiying the desired order.
+	
+	Using negative indices selects rows from the end.
+	
+	Passing multiple index arrays does something slightly diff; it selects a 1D array
+	of elements corresponding to each tuple of indices.
+	
+	Facncy indexing unlike slicing always copies the data into a new array.
+========================================================================================================
+Transposing Arrays : prog20.py
+	it is a spl form of reshaping, sort of a mirror copy along the diagonal.
+	
+	Matrix computations wil be very useful, for example 
+	when computing inner matrix product using no.dot.
+========================================================================================================
+Transpose and swapping array axes : prog21.py	
+	For higher dimensional arrays, transpose will accept a tuple of axis
+	numbers to permute the axes.
+	arr.transpose((1,0,2)): Here the axes have been reordered with the second axis first,
+	the first axiss second and last axis unchanged.
+	Simple transposing with arr.T is a spl case of swapping axes. ndarray has the method
+	swapaxes, which takes a pair of axis numbers and swithces the indicated axes to 
+	rearrange the data.
+	swapaxes returns a view on the data without making a copy.
+	
+========================================================================================================
+Universal function or ufunc 
+	is a func that performs element-wise operations on data in ndarrays.
+Many ufuncs are simple element-wise transformations, like sqrt or exp.
+	these are referred to as unary ufuncs.
+	modf returns the fractional and integeral parts of a floating-point array.
+========================================================================================================
+Sorting : prog31.py
+	Like Pytho's built-in list type,NumPy arrays can be sorted in-place with the
+	sort method.
+	we can sort each one-dimensional array in-place along an axis by passing the 
+	axis number to sort.
+	A quick-and-dirty way to compute the quantiles of an array is to sort it and select
+	the value at a particular rank.
+========================================================================================================
+Unique and Other Set Logic : prog32.py
+	np.unique returns the sorted unique values in an array
+	Contrast np.unique with the pure Python alternative
+		sorted(set(names))
+	np.in1d tests membership of the value in one array in another, returning 
+	a boolean array.
+Note : 	original data wil not change.
+========================================================================================================
+Methods : Array set operations
+
+method				description
+
+unique(x)			compute the sorted, unique elements in x
+intersect1d(x)		compute the sorted, common elements in x and y
+union1d(x,y)		compute the sorted union of elements
+int1d(x,y)			compute a boolean array indicating whether each element of x 
+					is contained in y.
+					
+setdiff1d(x,y)		set difference, elements in x that are not in y.
+setxor1d(x,y)		set symmetric difference; elements that are in either of the 
+					arrays, but noth both.
+========================================================================================================
+File IO with arrays : prog33.py
+	NumPy is able to save and load data to and from disk either in text or
+	binary format.
+	
+	np.save and np.load are the two workhorse functions for efficiently saving and
+	loading array data on disk.
+	Arrays are saved by default in an uncompressed raw binary format with the 
+	extension .npy.
+	
+	in the file path does not already end in .npy, the extension will be appended.
+	
+	the array on disk can then be loaded with np.load().
+	
+	we save multiple arrays in an uncompressed archive using np.savez().
+	
+	when loading an .npz file, we get back a dict-like object that loads the
+	individual arrays lazily.
+	
+	in your data compresses well, you may wish to use numpy.savez_compressed() instead.	
+========================================================================================================
+Linear Algebra : prog34.py
+	Linear algebra, like matrix multiplication, decompositions,determinants, and 
+	other square matrix math, is an important part of any array library.
+	
+	Unlike some languages like MATLAb, multiplying two two-dimensional arrays with
+	* is an element-wise product instead of a matrix dot product.
+	
+	Thus, there is a function dot(), both an array method and a function in the 
+	numpy namespace, for matrix multiplication.
+	
+	x.dot(y) is equivalent to np.dot(x,y).
+	
+	the @ symbol also works as an infix operater that perfoms matrix multidimensional.
+	
+	prog35.py
+	numpy.linalg has a standard set of matrix decompositions and things like inverse
+	and determinant.
+	
+	They use the popular linear algebra libraries internally like BLAS,LAPACK, or
+	possibly (depending on your NumPy build) the proprietary Intel MKL
+	(math kernel lib).
+	
+	qr computes the QR decompositions of matrix.
+	
+	methods / Functions
+	
+	Functions		Description
+	diagonal		Return the diagonal (or off-diagonal) elements of a square matrix 
+					as a 1D array, or convert a 1D array into a square matrix with
+					zeros on the off-diagonal.
+		
+	dot				Matrix multiplication
+	
+	trace			Computer the sum of diagonal elements
+	
+	det				Compute the matrix determinant
+	
+	eig				Compute the eigenvalues and eigenvectors of a square matrix
+	
+	inv				Compute the inverse of a square matrix
+	
+	pinv			Computer the Moore-Penrose pseudo-inverse of a matrix
+	
+	qr 				Computer the QR decomposition
+	
+	svd				Computer the singular value decompositions(SVD)
+	
+	solve			solve the linear system Ax = b for x, where A is a square matrix.
+	
+	lstsq			Computer the least-squares solution to Ax = b
+	
+========================================================================================================
+Reshaping Arrays : prog36.py
+	To reshape, pass a tuple indicating the new shape to the reshape array instance
+	method.
+	
+	one to the passed shape dimensions can be -1, in which case the value used for
+	that dimension will be inferred from the data.
+	
+	returns the ndarray but cant change original ndarray shape
+	
+	prog37.py
+	Since an array's shape attribute is a tuple, it can be passed to reshape, too.
+	
+	The opposite operation of reshape from one-dimensional to a higher dimesion is 
+	typically known as flattening or raveling.
+	
+	ravel does not produce a copy of the underlying values if the values in the 
+	result were contiguous in the original array. 
+	The flatten method behaves like ravel except it always returns a copy of the 
+	data.
+	
+	the data can be reshaped or raveled in different orders.
+========================================================================================================
+Concatenating and Spliting Arrays : prog38.py
+	numpy.concatenate takes a sequence(tuple,list etc.) of arrays and joins them 
+	together in order along the input axis.
+	
+	There aresome convenience functions, like vstack and hstack, for common kinds
+	of concatenation.
+	
+	prog39.py
+	split, on the other hand, slices apart an array into multiple arrays along
+	an axis.
+	
+	the value[1,3] passed to np.split indicate the indices at which to split the 
+	array pieces.
+========================================================================================================
+Broadcasting over axis with a 1D array : prog40.py
+	rule :
+		two arrays are compatible for broadcasting if for each trailing dimension
+		(i.e. starting from the end) the axis match or if either of the lengths is 1.
+		Broadcasting is then perfomed over the missing or length 1 dimension.
+		
+		Broadcasting describes how arithmetic works between arrays of different shapes.
+		
+		The simplest example of broadcasting occurs when combining a scalar value 
+		with an array.
+		Ex : A * 4
+		
+			Here we say that the scalar value 4 has been broadcast to all of the other 
+			elements in the multiplication operation.
+	
+		we can demean each column of an array by subtracting the column means.
+
+	prog41.py
+	Consider the last example and suppose we wised instead to subtract the means
+	value from each row.
+	
+	since arr.mean(0) has length 3, it is compatible for broadcasting across axis 
+	0 because the trailing dimension in arr is 3 and therefore matches.
+	
+	Accroding to the rules, to subtract over axis 1(i.e., subtract the row mean
+	from eac row), the smaller array must have shape(4,1).
+	
+	help : python for data analysis : Wes McKinney's book
+-------------------------------------------------------------------------------------------------------------------------------
+pandas
+Pandas supports three types of multi-axis indexing.
+
+	.loc
+		is primarily label based, but may also be used with a boolean array.
+		.loc will raise KeyError when the items are not found.
+		Allowed inputs are:
+			A single label, e.g. 5 or 'a'
+			(Note that 5 is interpreted as a label of the index.
+			This use is not an integer position along the index.).
+
+			A list or array of labels ['a', 'b', 'c'].
+
+			A slice object with labels 'a':'f'
+			(Note that contrary to usual python slices,
+			both the start and the stop are included, when present in the index.)
+
+			A boolean array
+
+			A callable function with one argument (the calling Series or DataFrame)
+			and that returns valid output for indexing (one of the above).
+
+
+	.iloc
+		is primarily integer position based (from 0 to length-1 of the axis),
+		but may also be used with a boolean array.
+		.iloc will raise IndexError if a requested indexer is out-of-bounds,
+		except slice indexers which allow out-of-bounds indexing.
+
+		Allowed inputs are:
+
+			An integer e.g. 5.
+
+			A list or array of integers [4, 3, 0].
+
+			A slice object with ints 1:7.
+
+			A boolean array.
+
+			A callable function with one argument (the calling Series or DataFrame)
+			and that returns valid output for indexing (one of the above).
+
+
+	.loc, .iloc, and also [] indexing can accept a callable as indexer.
+----------------------------------------------------------------------------------------------------
+Getting values from an object with "multi-axes" selection uses the following notation
+(using .loc as an example, but the following applies to .iloc as well).
+Any of the axes accessors may be the null slice :. Axes left out of the specification
+are assumed to be :, e.g. p.loc['a'] is equivalent to p.loc['a', :, :].
+
+Object 		Type Indexers
+Series		s.loc[indexer]
+DataFrame	df.loc[row_indexer,column_indexer]
+--------------------------------------------------------------------------------------------
+Basics	:
+	The following table shows return type values when indexing pandas objects with []:
+
+	Object 		Type Selection			Return Value Type
+	------		--------------			-----------------
+	Series		series[label]			scalar value
+	DataFrame	frame[colname]			Series corresponding to colname
+--------------------------------------------------------------------------------------------
+1.py : loc,iloc,[]
+2.py : loc,iloc,[]
+--------------------------------------------------------------------------------------------
+3.py :
+	list of columns as index : df[['A','B']]
+	list of labeled indexes as indexing : df.loc[[10,20]]
+	list of non-labeled indexes as indexing : df.iloc[[0,1]]
+--------------------------------------------------------------------------------------------
+4.py :
+	list of columns to set data :
+
+	pandas aligns all AXES when setting Series and DataFrame from .loc, and .iloc.
+	This will not modify df because the column alignment is before value assignment.
+	use method to_numpy() to set data
+--------------------------------------------------------------------------------------------
+5.py : slicing
+--------------------------------------------------------------------------------------------
+Attribute access
+	can use series/dataframe with . (dot operator) and column/labeled index
+Ex : 6.py
+warnings
+	You can use this access only if the index element is a valid Python identifier,
+		e.g. s.1 is not allowed.
+
+	The attribute will not be available if it conflicts with an existing method name,
+		e.g. s.min is not allowed.
+
+	Similarly, the attribute will not be available if it conflicts with any of the
+	following list:
+		index, major_axis, minor_axis, items.
+
+	In any of these cases, standard indexing will still work,
+	e.g. s['1'], s['min'], and s['index'] will access the corresponding element
+	or column.
+--------------------------------------------------------------------------------------------
+slicing
+	with series
+		to access data
+			s[:5]
+			s[::2]
+			s[::-1]
+		to set data
+			s[:5] = 0
+	with dataframe
+		access data
+			df[:3]
+			df[::-1]
+			df.loc['a':'f']	<== carefull has to use labelled index
+			df.loc[['a','b','c'],:]
+			df.loc['d','A':'C']
+
+		to set data
+			df.loc['c':] = 0
+
+--------------------------------------------------------------------------------------------
+try this
+	print(df.loc['a']>0)
+	print(df.loc[:,df1.loc['a']>0])
+	print(df['a','A'])
+--------------------------------------------------------------------------------------------
+s = pd.Series(list('abcde'),index=[0,3,2,5,4])
+print(s.loc[3:5])
+find output ....
+--------------------------------------------------------------------------------------------
+sort indexing : 7.py
+--------------------------------------------------------------------------------------------
+selection by position : iloc() :
+	with series : 8.py
+	with dataframe : 9.py
+
+--------------------------------------------------------------------------------------------
+boolean indexing : 10.py
+--------------------------------------------------------------------------------------------
+with lambda : 11.py
+--------------------------------------------------------------------------------------------
+indexing with isin : 12.py
+--------------------------------------------------------------------------------------------
+where method : 13.py,13_1.py
+	boolean indexing vs where
+
+	print(s[s>0])		: returns data which satisfy the condition
+	print(s.where(s>0)) : returns same shape object
+--------------------------------------------------------------------------------------------
+to set values using boolean indexing
+	s2 = s.copy()
+	s[s<0] = 0
+
+	df2 = df1.copy()
+	df2[df2<0] = 0
+to set values using where method
+	s2 = s.copy()
+	s.where(s<0,s,replace=True)
+
+	df2 = df1.copy()
+	df2.where(df2<0,s,replace=True)
+
+NOTE:
+	The signature for DataFrame.where() differs from numpy.where().
+	Roughly df1.where(m, df2) is equivalent to np.where(m, df1, df2).
+	try this :
+		print(df.where(df < 0, -df) == np.where(df < 0, df, -df))
+--------------------------------------------------------------------------------------------
+query() method	: 14.py
+	DataFrame objects have a query() method that allows selection using an expression.
+--------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+

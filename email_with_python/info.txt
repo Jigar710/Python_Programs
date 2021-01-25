@@ -1,0 +1,11 @@
+https://myaccount.google.com/lesssecureapps
+
+python -m smtpd -c DebuggingServer -n localhost:1025
+
+
+<!DOCTYPE HTML>
+<html>
+	<body>
+		<h1 style="color:SlateGray;">Welcome to GI,Surat</h1>
+	</body>
+</html>
