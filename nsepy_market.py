@@ -13,6 +13,6 @@ df = nsepy.get_history(symbol = "RELIANCE",start= from_date,end=to_date)
 print(df)
 end = time.time()
 print(end-start)
-help(nsepy.get_history)
+#help(nsepy.get_history)
 
 
