@@ -3,7 +3,6 @@ import nsepy
 from datetime import datetime,timedelta,date
 import time 
 
-#help(nsepy.get_history)
 start = time.time()
 to_date = datetime.now()
 to_date = datetime.strftime(to_date,"%y,%m,%d")
@@ -14,5 +13,6 @@ df = nsepy.get_history(symbol = "RELIANCE",start= from_date,end=to_date)
 print(df)
 end = time.time()
 print(end-start)
+help(nsepy.get_history)
 
 
